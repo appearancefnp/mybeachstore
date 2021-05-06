@@ -8,39 +8,6 @@ output_csv_fn = "mikasa.csv"
 
 row = df.iloc[0]
 
-@dataclass
-class Product:
-    name: str
-    quantity: int
-    vendor: str
-    tips: str
-    grams: int
-    price: float
-    price_low: float
-
-    def __init__(self, name, vendor, quantity, tips, grams, price_low, price = None):
-        self.name = name
-        self.vendor = vendor
-        self.quantity = quantity
-        self.tips = tips
-        self.grams = grams
-        self.price_low = price_low
-        self.price = price
-
-    def get_handle(self):
-        handle = self.name
-        handle = re.sub(r'\W+', ' ', handle)
-        handle = handle.replace(" ", "-")
-        handle = ' '.join(handle.split())
-        handle = handle.lower()
-        return handle
-
-    def get_price(self):
-        if self.price is None:
-            return self.price_low * 2.0
-        else:
-            return self.price
-
 products = [
     Product("Mikasa VXT 30", "Mikasa", 1, "Balls", 100, price_low=23.5, price=45),
     Product("Mikasa VX 3.5", "Mikasa", 1, "Balls", 100, price_low=6.5, price=15),
