@@ -10,8 +10,9 @@ class Product:
     grams: int
     price: float
     price_low: float
+    sku: str
 
-    def __init__(self, name, vendor, quantity, tips, grams, price_low, price = None):
+    def __init__(self, name, vendor, quantity, tips, grams, price_low, price = None, sku = None):
         self.name = name
         self.vendor = vendor
         self.quantity = quantity
@@ -19,9 +20,10 @@ class Product:
         self.grams = grams
         self.price_low = price_low
         self.price = price
+        self.sku = sku
 
     def get_handle(self):
-        handle = self.name
+        handle = self.vendor + " " + self.name
         handle = re.sub(r'\W+', ' ', handle)
         handle = handle.replace(" ", "-")
         handle = ' '.join(handle.split())

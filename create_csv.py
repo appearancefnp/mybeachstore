@@ -1,26 +1,24 @@
 import pandas as pd
-import os
 from dataclasses import dataclass
-import re
+from Product import Product
 
 df = pd.read_csv("/home/karlis/Desktop/products_oakley_import.csv")
-output_csv_fn = "mikasa.csv"
+output_csv_fn = "oakley_glasses.csv"
+
+# vincere 
 
 row = df.iloc[0]
 
+
 products = [
-    Product("Mikasa VXT 30", "Mikasa", 1, "Balls", 100, price_low=23.5, price=45),
-    Product("Mikasa VX 3.5", "Mikasa", 1, "Balls", 100, price_low=6.5, price=15),
-
-    Product("Mikasa Key Ring", "Mikasa", 1, "Accessories", 100, price_low=4.5, price=9),
-
-    Product("Mikasa Whistle WH-2 BK", "Mikasa", 1, "Whistle", 100, price_low=3, price=8),
-    Product("Mikasa Whistle RA0070-B", "Mikasa", 1, "Whistle", 100, price_low=4.95, price=12),
-    
-    Product("Mikasa Ball Bag For 6 Balls AC-BG260W-Blue", "Mikasa", 1, "Bags & Backpacks", 200, price_low=19.05, price=45),
-    Product("Mikasa Ball Bag For 6 Balls EK0046-B", "Mikasa", 1, "Bags & Backpacks", 200, price_low=15, price=30),
-
-    Product("Mikasa Hand Pump DHP21-BL", "Mikasa", 1, "Hand Pump", 100, price_low=4.5, price=9),
+    Product("Latch Beta Prizm Tungsten - Olive Ink", "Oakley", 1, "Sunglasses", 300, price_low=78, price=155.95, sku="OO9436-0354"),
+    Product("Frogskins Prizm Grey - Polished Black", "Oakley", 1, "Sunglasses", 300, price_low=52.5, price=104.95, sku="24-306"),
+    Product("Holbrook Red Iridium - Matte Black", "Oakley", 1, "Sunglasses", 300, price_low=67.5, price=134.95, sku="OO9102-36"),
+    Product("Holbrook Prizm Ruby - Matte Black", "Oakley", 1, "Sunglasses", 300, price_low=72.5, price=144.95, sku="OO9102-E255"),
+    Product("Latch Prizm Gray - Matte Black", "Oakley", 1, "Sunglasses", 300, price_low=73, price=145.95, sku="OO9265-5653"),
+    Product("Frogskins Lite Prizm Black - Ignite Pink", "Oakley", 1, "Sunglasses", 300, price_low=66, price=109.95, sku="OO9374-3263"),
+    Product("Manorburn Prizm Violet - Matte Black", "Oakley", 1, "Sunglasses", 300, price_low=62.5, price=102.95, sku="OO9479-0356"),
+    Product("Sylas Prizm Black - Matte Black", "Oakley", 1, "Sunglasses", 300, price_low=62.5, price=124.95, sku="OO9448-0357")
 ]
 
 
@@ -33,7 +31,9 @@ for i, product in enumerate(products):
     row["Type"] = product.tips
     row["Variant Inventory Qty"] = product.quantity
     row["Variant Price"] = product.get_price()
-    row["Cost per item"] = product.price_low
+    row["Variant Grams"] = product.grams
+    row["Cost per item"] = round(product.price_low * 0.8, 2)
+    row["Variant SKU"] = product.sku
 
     print(row)
 
