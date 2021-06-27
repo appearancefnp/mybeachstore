@@ -2,7 +2,7 @@ import pandas as pd
 from dataclasses import dataclass
 from Product import Product
 
-df = pd.read_csv("/home/karlis/Desktop/products_oakley_import.csv")
+df = pd.read_csv("products_oakley_import.csv")
 output_csv_fn = "oakley_glasses.csv"
 
 # vincere 
@@ -11,14 +11,24 @@ row = df.iloc[0]
 
 
 products = [
-    Product("Latch Beta Prizm Tungsten - Olive Ink", "Oakley", 1, "Sunglasses", 300, price_low=78, price=155.95, sku="OO9436-0354"),
-    Product("Frogskins Prizm Grey - Polished Black", "Oakley", 1, "Sunglasses", 300, price_low=52.5, price=104.95, sku="24-306"),
-    Product("Holbrook Red Iridium - Matte Black", "Oakley", 1, "Sunglasses", 300, price_low=67.5, price=134.95, sku="OO9102-36"),
-    Product("Holbrook Prizm Ruby - Matte Black", "Oakley", 1, "Sunglasses", 300, price_low=72.5, price=144.95, sku="OO9102-E255"),
-    Product("Latch Prizm Gray - Matte Black", "Oakley", 1, "Sunglasses", 300, price_low=73, price=145.95, sku="OO9265-5653"),
-    Product("Frogskins Lite Prizm Black - Ignite Pink", "Oakley", 1, "Sunglasses", 300, price_low=66, price=109.95, sku="OO9374-3263"),
-    Product("Manorburn Prizm Violet - Matte Black", "Oakley", 1, "Sunglasses", 300, price_low=62.5, price=102.95, sku="OO9479-0356"),
-    Product("Sylas Prizm Black - Matte Black", "Oakley", 1, "Sunglasses", 300, price_low=62.5, price=124.95, sku="OO9448-0357")
+    Product("Sutro S Prizm Road - Matte White", "Oakley", 1, "Sunglasses", 300, price_low=78, price=155.95, sku="OO9462-0528"),
+    Product("Sutro S Prizm Trail Torch - Matte Black", "Oakley", 1, "Sunglasses", 300, price_low=78, price=155.95, sku="OO9462-0328"),
+
+    Product("Sutro Lite Prizm Trail Torch - Matte Carbon", "Oakley", 1, "Sunglasses", 300, price_low=83, price=165.95, sku="OO9463-0439"),
+    Product("Sutro Lite Prizm Road - Matte White", "Oakley", 1, "Sunglasses", 300, price_low=83, price=165.95, sku="OO9463-0239"),
+    Product("Sutro Lite Prizm Black - Patrick Mahomes II Collection", "Oakley", 1, "Sunglasses", 300, price_low=93, price=185.95),
+
+    Product("Radar® EV Path® Prizm Grey - Matte Cool Grey", "Oakley", 1, "Sunglasses", 300, price_low=88.5, price=176.95, sku="OO9208-B938"),
+    Product("Radar® EV Path® Prizm Grey - Odyssey Collection Holographic", "Oakley", 1, "Sunglasses", 300, price_low=93, price=186.95, sku="OO9208-C538"),
+    Product("Radar® EV Path® Prizm Black - Electric Purple Shadow Camo", "Oakley", 1, "Sunglasses", 300, price_low=104.5, price=208.95, sku="OO9208-A238"),
+    Product("Radar® EV Path® Prizm Black Polarized - Polished White", "Oakley", 1, "Sunglasses", 300, price_low=118.5, price=236.95, sku="OO9208-9438"),
+
+    Product("Radar® EV Path® Prizm Road - Jolt Collection", "Oakley", 1, "Sunglasses", 300, price_low=93, price=186.95, sku="OO9208-A038"),
+    Product("Radar® EV Path® Prizm Road Jade - Steel", "Oakley", 1, "Sunglasses", 300, price_low=93, price=186.95, sku="OO9208-A138"),
+
+    Product("Radar® EV Path® Prizm Golf - Polished White", "Oakley", 1, "Sunglasses", 300, price_low=93, price=186.95, sku="OO9208-A538"),
+    Product("Radar® EV Path® Prizm Trail Torch - Matte Black", "Oakley", 1, "Sunglasses", 300, price_low=93, price=186.95, sku="OO9208-9038"),
+    
 ]
 
 
@@ -32,13 +42,11 @@ for i, product in enumerate(products):
     row["Variant Inventory Qty"] = product.quantity
     row["Variant Price"] = product.get_price()
     row["Variant Grams"] = product.grams
-    row["Cost per item"] = round(product.price_low * 0.8, 2)
+    row["Cost per item"] = product.price_low
     row["Variant SKU"] = product.sku
-
-    print(row)
+    row["Tags"] = "_Oak"
 
     new_df = new_df.append(row)
-    # new_df.loc[i] = row
 
 print(new_df.head(10))
 
